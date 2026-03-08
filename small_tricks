@@ -1,1 +1,0 @@
-- To count the number of lines in a CSV form command line: python -c "import csv; print(sum(1 for row in csv.reader(open('redcode_prompts.csv', encoding='utf-8'))))"
