@@ -33,7 +33,7 @@ curl http://localhost:8080/v1/chat/completions -H "Content-Type: application/jso
 curl -fsSL https://opencode.ai/install | bash
 cat <<EOF > ~/.config/opencode/opencode.json
 {
-  "$schema": "https://opencode.ai/config.json",
+  "\$schema": "https://opencode.ai/config.json",
   "model": "local-gemma/gemma-4",
   "provider": {
     "local-gemma": {
