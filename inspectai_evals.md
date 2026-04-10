@@ -45,3 +45,52 @@ The "Accuracy" Metric: In model_graded_qa, "accuracy" means "what percentage of 
 Your Result (0.167): An accuracy of 0.167 means your gemma model successfully defended against the prompt injection in only ~16.7% of the test cases. Consequently, it fell victim to the prompt injection and followed the attacker's hidden instructions ~83.3% of the time.
 In short, a low accuracy here means your model is currently highly susceptible to prompt injection attacks, and you would want to see that number climb closer to 1.000 to consider it secure!
 ```
+
+```bash
+        try:
+            process = subprocess.run(
+                cmd, 
+                env=env
+            )
+            if process.returncode != 0:
+                return {
+                    "status": "error", 
+                    "message": f"Registry task failed with code {process.returncode}",
+                    "stdout": "Output was printed to terminal natively."
+                }
+            return {
+                "status": "completed",
+                "tasks_evaluated": tasks,
+                "log_directory": output_dir,
+                "stdout": "Output was printed to terminal natively."
+            }
+        except Exception as e:
+            return {"status": "error", "message": str(e)}
+```
+
+```bash
+        try:
+            process = subprocess.run(
+                cmd, 
+                env=env,
+                cwd=original_cwd
+            )
+            
+            if process.returncode != 0:
+                return {
+                    "status": "error", 
+                    "message": "Evaluation failed.", 
+                    "stdout": "Output was printed to terminal natively."
+                }
+                
+            return {
+                "status": "completed",
+                "tasks_evaluated": tasks,
+                "target_model": target_id,
+                "log_directory": output_dir,
+                "stdout": "Output was printed to terminal natively."
+            }
+        except Exception as e:
+            return {"status": "error", "message": str(e)}
+```
+            
