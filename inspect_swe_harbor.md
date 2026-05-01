@@ -24,15 +24,24 @@ from inspect_swe import mini_swe_agent
 
 @task
 def podman_smoke_test():
-    # Fetch the benchmark from Harbor
     base_task = hello_world()
     
-    # Reconstruct the task to inject our SWE agent and force podman
+    # Extract the Harbor sandbox config (usually a tuple like ("docker", "/path/to/compose.yaml"))
+    original_sandbox = base_task.sandbox
+    
+    # Safely swap "docker" for "podman" while keeping the compose.yaml path
+    if isinstance(original_sandbox, tuple) and original_sandbox[0] == "docker":
+        sandbox = ("podman", original_sandbox[1])
+    elif original_sandbox == "docker":
+        sandbox = "podman"
+    else:
+        sandbox = "podman"
+
     return Task(
         dataset=base_task.dataset,
         scorer=base_task.scorer,
         solver=mini_swe_agent(),
-        sandbox="podman"
+        sandbox=sandbox
     )
 EOF
 
