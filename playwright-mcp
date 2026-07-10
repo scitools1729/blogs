@@ -1,0 +1,6 @@
+I would like to add both of these MCPs. It should be available for the user globally:
+https://github.com/ChromeDevTools/chrome-devtools-mcp
+https://playwright.dev/docs/getting-started-mcp
+
+I would like to go here and create a list of 10 random names. Once you ahve created the list, I want you to give me the URL:
+https://www.random.org/lists/
